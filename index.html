@@ -1,0 +1,437 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Something for Becky 🖤</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <main class="app">
+
+        <!-- Progress Bar -->
+        <div class="progress-area">
+            <div class="progress-text">
+                <span id="pageTitle">A message for you</span>
+                <span id="pageNumber">1 / 11</span>
+            </div>
+
+            <div class="progress-track">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+        </div>
+
+        <!-- Form -->
+        <form
+            id="beckyForm"
+            action="https://formspree.io/f/xoeezovq"
+            method="POST"
+        >
+
+            <!-- Hidden fields -->
+            <input type="hidden" name="apology" id="apology">
+            <input type="hidden" name="cool" id="cool">
+            <input type="hidden" name="memories" id="memories">
+            <input type="hidden" name="favorite" id="favorite">
+            <input type="hidden" name="feelings" id="feelings">
+            <input type="hidden" name="hangout" id="hangout">
+            <input type="hidden" name="hungry" id="hungry">
+
+            <section class="card">
+
+                <!-- PAGE 1 -->
+                <div class="page active">
+                    <div class="circle">🖤</div>
+                    <p class="small-title">MADE FOR YOU</p>
+
+                    <h1>Hey Becky.</h1>
+
+                    <p class="main-text">
+                        I made this little space just for you.
+                    </p>
+
+                    <p>
+                        There are a few things I wanted to say.
+                    </p>
+
+                    <button type="button" class="main-button" onclick="nextPage()">
+                        Next →
+                    </button>
+                </div>
+
+
+                <!-- PAGE 2 -->
+                <div class="page">
+                    <div class="circle">💭</div>
+                    <p class="small-title">FIRST OF ALL</p>
+
+                    <h2>I'm sorry.</h2>
+
+                    <p class="main-text">
+                        I genuinely didn't mean to hurt your feelings.
+                    </p>
+
+                    <h3>Do you accept my apology hunnie?</h3>
+
+                    <div class="choices">
+                        <button type="button" onclick="choose('apology', 'Yes', this)">
+                            Yes 🖤
+                        </button>
+
+                        <button type="button" onclick="choose('apology', 'No', this)">
+                            Not yet
+                        </button>
+
+                        <button type="button" onclick="choose('apology', 'Talk later', this)">
+                           Maybe later
+                        </button>
+                    </div>
+
+                    <button type="button" class="back-button" onclick="previousPage()">
+                        ← Back
+                    </button>
+
+                    <button type="button" class="next-button" onclick="nextPage()">
+                        Next →
+                    </button>
+                </div>
+
+
+                <!-- PAGE 3 -->
+                <div class="page">
+                    <div class="circle">🤝</div>
+                    <p class="small-title">HONESTLY</p>
+
+                    <h2>I want us to be cool.</h2>
+
+                    <p>
+                        I miss talking to you comfortably. You're one of my
+                        favorite people to talk to and I hope we can be cool
+                        again.
+                    </p>
+
+                    <h3>Can we talk like before?</h3>
+
+                    <div class="choices">
+                        <button type="button" onclick="choose('cool', 'Yes', this)">
+                            Yes 😊
+                        </button>
+
+                        <button type="button" onclick="choose('cool', 'Not right now', this)">
+                            Not 
+                        </button>
+
+                        <button type="button" onclick="choose('cool', 'Maybe later', this)">
+                            Maybe later
+                        </button>
+                    </div>
+
+                    <button type="button" class="back-button" onclick="previousPage()">
+                        ← Back
+                    </button>
+
+                    <button type="button" class="next-button" onclick="nextPage()">
+                        Next →
+                    </button>
+                </div>
+
+
+                <!-- PAGE 4 -->
+                <div class="page">
+                    <div class="circle">🌙</div>
+                    <p class="small-title">MEMORIES</p>
+
+                    <h2>I miss gardening together.</h2>
+
+                    <p>
+                        I appreciate the good memories we shared.
+                    </p>
+
+                    <h3>Do you miss our good times too?</h3>
+
+                    <div class="choices">
+                        <button type="button" onclick="choose('memories', 'Yeah', this)">
+                            Yeah 🖤
+                        </button>
+
+                        <button type="button" onclick="choose('memories', 'Sometimes', this)">
+                            Sometimes
+                        </button>
+
+                        <button type="button" onclick="choose('memories', 'Not really', this)">
+                            Not really
+                        </button>
+                    </div>
+
+                    <button type="button" class="back-button" onclick="previousPage()">
+                        ← Back
+                    </button>
+
+                    <button type="button" class="next-button" onclick="nextPage()">
+                        Next →
+                    </button>
+                </div>
+
+
+                <!-- PAGE 5 -->
+                <div class="page">
+                    <div class="circle">★</div>
+                    <p class="small-title">A SMALL QUESTION</p>
+
+                    <h2>You're one of my favorite people.</h2>
+
+                    <p>
+                        I enjoy talking to you and I value having you in my life.
+                    </p>
+
+                    <h3>Am I still one of your favorite people?</h3>
+
+                    <div class="choices">
+                        <button type="button" onclick="choose('favorite', 'Yes', this)">
+                            Yes 🖤
+                        </button>
+
+                        <button type="button" onclick="choose('favorite', 'Maybe', this)">
+                            Maybe 😅
+                        </button>
+
+                        <button type="button" onclick="choose('favorite', 'No', this)">
+                            No
+                        </button>
+                    </div>
+
+                    <button type="button" class="back-button" onclick="previousPage()">
+                        ← Back
+                    </button>
+
+                    <button type="button" class="next-button" onclick="nextPage()">
+                        Next →
+                    </button>
+                </div>
+
+
+                <!-- PAGE 6 -->
+                <div class="page">
+                    <div class="circle">♥</div>
+                    <p class="small-title">ONE LAST QUESTION</p>
+
+                    <h2>You matter to me.</h2>
+
+                    <p>
+                        I care about you a lot and I just wanted to be honest with you.
+                    </p>
+
+                    <h3>How do you feel about us?</h3>
+
+                    <div class="choices">
+                        <button
+                            type="button"
+                            onclick="choose('feelings', 'We cool as before', this)"
+                        >
+                            We cool as before 🖤
+                        </button>
+
+                        <button
+                            type="button"
+                            onclick="choose('feelings', 'I need time', this)"
+                        >
+                            I need time 
+                        </button>
+                    </div>
+
+                    <button type="button" class="back-button" onclick="previousPage()">
+                        ← Back
+                    </button>
+
+                    <button type="button" class="next-button" onclick="nextPage()">
+                        Next →
+                    </button>
+                </div>
+
+
+                <!-- PAGE 7 -->
+                <div class="page">
+                    <div class="circle">✉</div>
+                    <p class="small-title">YOUR TURN</p>
+
+                    <h2>Tell me how you feel.</h2>
+
+                    <p>
+                        You can tell me anything. 
+                    </p>
+
+                    <textarea
+                        id="message"
+                        name="message"
+                        placeholder="Write whatever is on your mind..."
+                        required
+                    ></textarea>
+
+                    <button type="button" class="back-button" onclick="previousPage()">
+                        ← Back
+                    </button>
+
+                    <button type="button" class="main-button" onclick="submitMessage()">
+                        Continue →
+                    </button>
+                </div>
+
+
+                <!-- PAGE 8 -->
+                <div class="page">
+                    <div class="circle">🥹</div>
+                    <p class="small-title">JUST WONDERING</p>
+
+                    <h2>
+                        Do you think we have enough trillion signs right now
+                        to hang out? 
+                    </h2>
+
+                    <p>
+                        Maybe all these are signs . 🖤
+                    </p>
+
+                    <div class="choices">
+                        <button
+                            type="button"
+                            onclick="choose('hangout', 'Yes, let us hang out', this)"
+                        >
+                            Yesss
+                        </button>
+
+                        <button
+                            type="button"
+                            onclick="choose('hangout', 'Maybe soon', this)"
+                        >
+                            Maybe soon 
+                        </button>
+
+                        <button
+                            type="button"
+                            onclick="choose('hangout', 'I need more time', this)"
+                        >
+                            Idk 💭
+                        </button>
+                    </div>
+
+                    <button type="button" class="back-button" onclick="previousPage()">
+                        ← Back
+                    </button>
+
+                    <button type="button" class="next-button" onclick="nextPage()">
+                        Next →
+                    </button>
+                </div>
+
+
+                <!-- PAGE 9 -->
+                <div class="page">
+                    <div class="circle">🍔</div>
+                    <p class="small-title">A RANDOM QUESTION</p>
+
+                    <h2>
+                        Do you get hungry from the bottom of your stomach
+                        sometimes? 
+                    </h2>
+
+                    <p>Just a random question 😂</p>
+
+                    <div class="choices">
+                        <button
+                            type="button"
+                            onclick="choose('hungry', 'Sometimes', this)"
+                        >
+                            Sometimes 
+                        </button>
+
+                        <button
+                            type="button"
+                            onclick="choose('hungry', 'When stoned', this)"
+                        >
+                            When stoned 😂
+                        </button>
+                    </div>
+
+                    <button type="button" class="back-button" onclick="previousPage()">
+                        ← Back
+                    </button>
+
+                    <button type="button" class="next-button" onclick="nextPage()">
+                        Next →
+                    </button>
+                </div>
+
+
+                <!-- PAGE 10 -->
+                <div class="page">
+                    <div class="circle">💻</div>
+                    <p class="small-title">ONE LAST THING</p>
+
+                    <h2>I'll teach you coding. </h2>
+
+                    <p>
+                        Maybe one day we'll sit together and I'll show you how to create some cool stuff with code. 
+                    </p>
+
+                    <button type="button" class="back-button" onclick="previousPage()">
+                        ← Back
+                    </button>
+
+                    <button type="button" class="next-button" onclick="nextPage()">
+                        One more thing →
+                    </button>
+                </div>
+
+
+                <!-- PAGE 11 - FINAL PAGE -->
+                <div class="page final-page">
+                    <div class="circle">❤️</div>
+
+                    <p class="small-title">A SPECIAL MESSAGE</p>
+
+                    <h1>One last thing...</h1>
+
+                    <p class="main-text">
+                        I have something special to tell you. 🖤
+                    </p>
+
+                    <button
+                        type="button"
+                        class="love-button"
+                        onclick="showLove()"
+                    >
+                        Click Me 🖤
+                    </button>
+
+                    <div
+                        id="loveMessage"
+                        class="love-message"
+                        style="display: none;"
+                    >
+                        ❤️ I LOVE YOU BABY ❤️
+                    </div>
+
+                    <button
+                        type="button"
+                        class="back-button"
+                        onclick="previousPage()"
+                    >
+                        ← Back
+                    </button>
+                </div>
+
+            </section>
+        </form>
+
+    </main>
+
+    <script src="script.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,368 @@
+/* =========================
+   GENERAL RESET
+========================= */
+
+* {
+    box-sizing: border-box;
+}
+
+
+/* =========================
+   PAGE BACKGROUND
+========================= */
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    background: #0d0d0d;
+    color: #ffffff;
+    font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+
+/* =========================
+   MAIN APP
+========================= */
+
+.app {
+    width: 100%;
+    max-width: 650px;
+}
+
+
+/* =========================
+   PROGRESS BAR
+========================= */
+
+.progress-area {
+    margin-bottom: 18px;
+}
+
+.progress-text {
+    display: flex;
+    justify-content: space-between;
+    color: #999;
+    font-size: 13px;
+    margin-bottom: 8px;
+}
+
+.progress-track {
+    height: 5px;
+    background: #292929;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    width: 0;
+    background: #cfcfcf;
+    transition: width 0.4s ease;
+}
+
+
+/* =========================
+   FORM CARD
+========================= */
+
+.card {
+    background: #191919;
+    border: 1px solid #333;
+    border-radius: 25px;
+    padding: 45px;
+    min-height: 520px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+
+/* =========================
+   DIFFERENT FORM PAGES
+========================= */
+
+.page {
+    display: none;
+    text-align: center;
+    animation: appear 0.5s ease;
+}
+
+.page.active {
+    display: block;
+}
+
+
+/* Page animation */
+
+@keyframes appear {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* =========================
+   EMOJI CIRCLE
+========================= */
+
+.circle {
+    width: 70px;
+    height: 70px;
+    margin: 0 auto 15px;
+    background: #282828;
+    border: 1px solid #404040;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+}
+
+
+/* =========================
+   TEXT AND HEADINGS
+========================= */
+
+h1,
+h2 {
+    margin: 10px 0 20px;
+    color: #ffffff;
+}
+
+h1 {
+    font-size: 36px;
+}
+
+h2 {
+    font-size: 28px;
+}
+
+h3 {
+    color: #e0e0e0;
+    margin-top: 30px;
+}
+
+p {
+    color: #b5b5b5;
+    line-height: 1.8;
+    font-size: 16px;
+}
+
+.main-text {
+    color: #eeeeee;
+    font-size: 18px;
+}
+
+.small-title {
+    color: #777;
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 3px;
+}
+
+
+/* =========================
+   ANSWER BUTTONS
+========================= */
+
+.choices {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.choices button {
+    width: 100%;
+    padding: 15px;
+    background: #272727;
+    color: #eeeeee;
+    border: 1px solid #3d3d3d;
+    border-radius: 12px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.25s ease;
+}
+
+.choices button:hover {
+    background: #383838;
+    transform: translateY(-2px);
+}
+
+
+/* Selected answer */
+
+.choices button.selected {
+    background: #e5e5e5;
+    color: #111;
+    border-color: #ffffff;
+}
+
+
+/* =========================
+   MAIN AND NEXT BUTTONS
+========================= */
+
+.main-button,
+.next-button {
+    margin-top: 25px;
+    padding: 14px 28px;
+    background: #e5e5e5;
+    color: #111;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.25s ease;
+}
+
+.main-button:hover,
+.next-button:hover {
+    background: #ffffff;
+    transform: translateY(-2px);
+}
+
+
+/* =========================
+   BACK BUTTON
+========================= */
+
+.back-button {
+    margin-top: 25px;
+    margin-right: 10px;
+    padding: 12px 22px;
+    background: transparent;
+    color: #cccccc;
+    border: 1px solid #555;
+    border-radius: 12px;
+    font-size: 15px;
+    cursor: pointer;
+    transition: 0.25s ease;
+}
+
+.back-button:hover {
+    background: #272727;
+    color: #ffffff;
+}
+
+
+/* =========================
+   MESSAGE TEXT AREA
+========================= */
+
+textarea {
+    width: 100%;
+    min-height: 150px;
+    margin-top: 15px;
+    padding: 15px;
+    background: #252525;
+    color: #ffffff;
+    border: 1px solid #444;
+    border-radius: 14px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    outline: none;
+    resize: vertical;
+}
+
+textarea:focus {
+    border-color: #aaa;
+}
+
+textarea::placeholder {
+    color: #777;
+}
+
+
+/* =========================
+   FINAL LOVE BUTTON
+========================= */
+
+.love-button {
+    margin-top: 25px;
+    padding: 16px 35px;
+    background: #ffffff;
+    color: #111;
+    border: none;
+    border-radius: 30px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.love-button:hover {
+    transform: scale(1.08);
+    background: #e5e5e5;
+}
+
+
+/* =========================
+   LOVE MESSAGE
+========================= */
+
+.love-message {
+    margin-top: 30px;
+    font-size: 25px;
+    font-weight: bold;
+    color: #ffffff;
+    animation: loveAppear 0.8s ease;
+}
+
+
+/* Final message animation */
+
+@keyframes loveAppear {
+    from {
+        opacity: 0;
+        transform: scale(0.7);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+
+/* =========================
+   MOBILE PHONE DESIGN
+========================= */
+
+@media (max-width: 600px) {
+
+    body {
+        padding: 15px;
+        align-items: flex-start;
+    }
+
+    .card {
+        padding: 30px 20px;
+        min-height: 500px;
+    }
+
+    h1 {
+        font-size: 30px;
+    }
+
+    h2 {
+        font-size: 24px;
+    }
+
+    .choices button {
+        font-size: 15px;
+    }
+
+    .love-message {
+        font-size: 22px;
+    }
+}
