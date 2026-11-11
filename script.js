@@ -151,11 +151,6 @@ form.addEventListener("submit", (event) => {
 });
 
 
-// Start the website
-showPage(currentPage);
-/* =========================
-   BACKGROUND MUSIC
-   ========================= */
 
 const music = document.getElementById("bgMusic");
 const musicBtn = document.getElementById("musicBtn");
@@ -175,7 +170,8 @@ musicBtn.addEventListener("click", () => {
         musicBtn.innerHTML = "🎶";
         musicBtn.setAttribute("aria-label", "Pause music");
     }
-
+// Start the website
+showPage(currentPage);
     isPlaying = !isPlaying;
 });
 // Start music on the visitor's first interaction
