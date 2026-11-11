@@ -49,14 +49,28 @@ function showPage(page) {
 }
 
 
-// Go to the next page
 function nextPage() {
+    const currentPageElement = pages[currentPage];
+
+    // Check whether this page has answer choices
+    const choices = currentPageElement.querySelector(".choices");
+
+    if (choices) {
+        // Check whether Becky selected an answer
+        const selectedAnswer = choices.querySelector("button.selected");
+
+        if (!selectedAnswer) {
+            alert("Please choose an answer before continuing 😊");
+            return;
+        }
+    }
+
+    // Move to the next page only if an answer was selected
     if (currentPage < pages.length - 1) {
         currentPage++;
         showPage(currentPage);
     }
 }
-
 
 // Go to the previous page
 function previousPage() {
