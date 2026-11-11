@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,15 +11,26 @@
 </head>
 
 <body>
-<!-- Background Music -->
-<audio id="bgMusic" loop>
-    <source src="music.mp3" type="audio/mpeg">
-</audio>
 
-<!-- Music Button -->
-<button id="musicBtn" class="music-btn" aria-label="Play music">
-    🎵
-</button>
+    <!-- =========================
+         BACKGROUND MUSIC
+         ========================= -->
+    <audio id="bgMusic" loop preload="auto">
+        <source src="music.mp3" type="audio/mpeg">
+        Your browser does not support audio playback.
+    </audio>
+
+    <!-- Music Play/Pause Button -->
+    <button
+        id="musicBtn"
+        class="music-btn"
+        type="button"
+        aria-label="Play music"
+    >
+        🎵
+    </button>
+
+
     <main class="app">
 
         <!-- Progress Bar -->
@@ -34,6 +44,7 @@
                 <div class="progress-bar" id="progressBar"></div>
             </div>
         </div>
+
 
         <!-- Form -->
         <form
@@ -50,6 +61,7 @@
             <input type="hidden" name="feelings" id="feelings">
             <input type="hidden" name="hangout" id="hangout">
             <input type="hidden" name="hungry" id="hungry">
+
 
             <section class="card">
 
@@ -97,7 +109,7 @@
                         </button>
 
                         <button type="button" onclick="choose('apology', 'Talk later', this)">
-                           Maybe later
+                            Maybe later
                         </button>
                     </div>
 
@@ -132,7 +144,7 @@
                         </button>
 
                         <button type="button" onclick="choose('cool', 'Not right now', this)">
-                            Not 
+                            Not right now
                         </button>
 
                         <button type="button" onclick="choose('cool', 'Maybe later', this)">
@@ -249,7 +261,7 @@
                             type="button"
                             onclick="choose('feelings', 'I need time', this)"
                         >
-                            I need time 
+                            I need time
                         </button>
                     </div>
 
@@ -271,7 +283,7 @@
                     <h2>Tell me how you feel.</h2>
 
                     <p>
-                        You can tell me anything. 
+                        You can tell me anything.
                     </p>
 
                     <textarea
@@ -285,7 +297,11 @@
                         ← Back
                     </button>
 
-                    <button type="button" class="main-button" onclick="submitMessage()">
+                    <button
+                        type="button"
+                        class="main-button"
+                        onclick="submitMessage()"
+                    >
                         Continue →
                     </button>
                 </div>
@@ -298,11 +314,11 @@
 
                     <h2>
                         Do you think we have enough trillion signs right now
-                        to hang out? 
+                        to hang out?
                     </h2>
 
                     <p>
-                        Maybe all these are signs . 🖤
+                        Maybe all these are signs. 🖤
                     </p>
 
                     <div class="choices">
@@ -317,7 +333,7 @@
                             type="button"
                             onclick="choose('hangout', 'Maybe soon', this)"
                         >
-                            Maybe soon 
+                            Maybe soon
                         </button>
 
                         <button
@@ -345,7 +361,7 @@
 
                     <h2>
                         Do you get hungry from the bottom of your stomach
-                        sometimes? 
+                        sometimes?
                     </h2>
 
                     <p>Just a random question 😂</p>
@@ -355,7 +371,7 @@
                             type="button"
                             onclick="choose('hungry', 'Sometimes', this)"
                         >
-                            Sometimes 
+                            Sometimes
                         </button>
 
                         <button
@@ -381,10 +397,11 @@
                     <div class="circle">💻</div>
                     <p class="small-title">ONE LAST THING</p>
 
-                    <h2>I'll teach you coding. </h2>
+                    <h2>I'll teach you coding.</h2>
 
                     <p>
-                        Maybe one day we'll sit together and I'll show you how to create some cool stuff with code. 
+                        Maybe one day we'll sit together and I'll show you how
+                        to create some cool stuff with code.
                     </p>
 
                     <button type="button" class="back-button" onclick="previousPage()">
@@ -439,7 +456,11 @@
 
     </main>
 
+
+    <!-- JavaScript -->
     <script src="script.js"></script>
 
 </body>
 </html>
+
+
