@@ -19,6 +19,7 @@ const titles = [
     "Just wondering",
     "A random question",
     "One last thing",
+    "Something on my mind 🖤",
     "A special message ❤️"
 ];
 
