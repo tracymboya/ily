@@ -1,4 +1,3 @@
-
 let currentPage = 0;
 
 const pages = document.querySelectorAll(".page");
@@ -59,7 +58,6 @@ function previousPage() {
     }
 }
 
-
 // Save and highlight an answer
 function choose(question, response, button) {
     // Save answer in JavaScript
@@ -82,12 +80,11 @@ function choose(question, response, button) {
         item.classList.remove("selected");
     });
 
-    // Highlight the button that was actually clicked
+    // Highlight the button that was clicked
     button.classList.add("selected");
 
     console.log("Answer saved:", question, response);
 }
-
 
 // Send the form answers
 async function sendAnswers() {
@@ -111,7 +108,7 @@ async function sendAnswers() {
 }
 
 
-// Submit the message on Page 7
+// Submit the message
 async function submitMessage() {
     const messageInput = document.getElementById("message");
     const message = messageInput.value.trim();
@@ -134,7 +131,6 @@ async function submitMessage() {
     }
 }
 
-
 // Show the final love message
 function showLove() {
     const loveMessage = document.getElementById("loveMessage");
@@ -151,38 +147,52 @@ form.addEventListener("submit", (event) => {
 });
 
 
-
 const music = document.getElementById("bgMusic");
 const musicBtn = document.getElementById("musicBtn");
 
 let isPlaying = false;
 
+
 // Play or pause music when the music button is clicked
-musicBtn.addEventListener("click", () => {
-    if (isPlaying) {
-        music.pause();
+if (music && musicBtn) {
+    musicBtn.addEventListener("click", () => {
+        if (music.paused) {
+            music.play()
+                .then(() => {
+                    isPlaying = true;
+                    musicBtn.classList.add("playing");
+                    musicBtn.innerHTML = "🎶";
+                    musicBtn.setAttribute("aria-label", "Pause music");
+                })
+                .catch((error) => {
+                    console.error("Music could not play:", error);
+                });
+
+        } else {
+            music.pause();
+            isPlaying = false;
+            musicBtn.classList.remove("playing");
+            musicBtn.innerHTML = "🎵";
+            musicBtn.setAttribute("aria-label", "Play music");
+        }
+    });
+
+
+    // Keep the button state correct when music ends or pauses
+    music.addEventListener("pause", () => {
+        isPlaying = false;
         musicBtn.classList.remove("playing");
         musicBtn.innerHTML = "🎵";
         musicBtn.setAttribute("aria-label", "Play music");
-    } else {
-        music.play();
+    });
+
+    music.addEventListener("play", () => {
+        isPlaying = true;
         musicBtn.classList.add("playing");
         musicBtn.innerHTML = "🎶";
         musicBtn.setAttribute("aria-label", "Pause music");
-    }
-// Start the website
+    });
+}
+
 showPage(currentPage);
-    isPlaying = !isPlaying;
-});
-// Start music on the visitor's first interaction
-document.addEventListener("click", function startMusic() {
-    if (!isPlaying) {
-        music.play().then(() => {
-            isPlaying = true;
-            musicBtn.classList.add("playing");
-            musicBtn.innerHTML = "🎶";
-        }).catch(() => {
-            console.log("Music could not start.");
-        });
-    }
-}, { once: true });
+
