@@ -385,3 +385,16 @@ textarea::placeholder {
         font-size: 22px;
     }
 }
+/* Page 11 styling */
+.page-eleven {
+    text-align: center;
+}
+
+.page-eleven p {
+    margin-bottom: 16px;
+    line-height: 1.7;
+}
+
+.page-eleven .main-text {
+    font-size: 1.1rem;
+}
