@@ -1,15 +1,6 @@
-/* =========================
-   GENERAL RESET
-========================= */
-
 * {
     box-sizing: border-box;
 }
-
-
-/* =========================
-   PAGE BACKGROUND
-========================= */
 
 body {
     margin: 0;
@@ -33,10 +24,6 @@ body {
     max-width: 650px;
 }
 
-
-/* =========================
-   PROGRESS BAR
-========================= */
 
 .progress-area {
     margin-bottom: 18px;
@@ -65,10 +52,6 @@ body {
 }
 
 
-/* =========================
-   FORM CARD
-========================= */
-
 .card {
     background: #191919;
     border: 1px solid #333;
@@ -79,9 +62,6 @@ body {
 }
 
 
-/* =========================
-   DIFFERENT FORM PAGES
-========================= */
 
 .page {
     display: none;
@@ -94,7 +74,6 @@ body {
 }
 
 
-/* Page animation */
 
 @keyframes appear {
     from {
@@ -109,9 +88,6 @@ body {
 }
 
 
-/* =========================
-   EMOJI CIRCLE
-========================= */
 
 .circle {
     width: 70px;
@@ -127,9 +103,6 @@ body {
 }
 
 
-/* =========================
-   TEXT AND HEADINGS
-========================= */
 
 h1,
 h2 {
@@ -169,9 +142,6 @@ p {
 }
 
 
-/* =========================
-   ANSWER BUTTONS
-========================= */
 
 .choices {
     display: flex;
@@ -207,9 +177,6 @@ p {
 }
 
 
-/* =========================
-   MAIN AND NEXT BUTTONS
-========================= */
 
 .main-button,
 .next-button {
@@ -232,10 +199,6 @@ p {
 }
 
 
-/* =========================
-   BACK BUTTON
-========================= */
-
 .back-button {
     margin-top: 25px;
     margin-right: 10px;
@@ -255,9 +218,6 @@ p {
 }
 
 
-/* =========================
-   MESSAGE TEXT AREA
-========================= */
 
 textarea {
     width: 100%;
@@ -283,10 +243,6 @@ textarea::placeholder {
 }
 
 
-/* =========================
-   FINAL LOVE BUTTON
-========================= */
-
 .love-button {
     margin-top: 25px;
     padding: 16px 35px;
@@ -306,10 +262,6 @@ textarea::placeholder {
 }
 
 
-/* =========================
-   LOVE MESSAGE
-========================= */
-
 .love-message {
     margin-top: 30px;
     font-size: 25px;
@@ -319,7 +271,6 @@ textarea::placeholder {
 }
 
 
-/* Final message animation */
 
 @keyframes loveAppear {
     from {
@@ -333,10 +284,6 @@ textarea::placeholder {
     }
 }
 
-
-/* =========================
-   MOBILE PHONE DESIGN
-========================= */
 
 @media (max-width: 600px) {
 
@@ -364,5 +311,44 @@ textarea::placeholder {
 
     .love-message {
         font-size: 22px;
+    }
+}
+/* =========================
+   MUSIC BUTTON
+   ========================= */
+
+.music-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    border: none;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.15);
+    color: white;
+    font-size: 22px;
+    cursor: pointer;
+    z-index: 1000;
+    backdrop-filter: blur(10px);
+    transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.music-btn:hover {
+    transform: scale(1.1);
+    background: rgba(255, 255, 255, 0.25);
+}
+
+.music-btn.playing {
+    animation: musicPulse 1.5s infinite;
+}
+
+@keyframes musicPulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.15);
     }
 }
