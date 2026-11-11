@@ -178,4 +178,15 @@ musicBtn.addEventListener("click", () => {
 
     isPlaying = !isPlaying;
 });
-
+// Start music on the visitor's first interaction
+document.addEventListener("click", function startMusic() {
+    if (!isPlaying) {
+        music.play().then(() => {
+            isPlaying = true;
+            musicBtn.classList.add("playing");
+            musicBtn.innerHTML = "🎶";
+        }).catch(() => {
+            console.log("Music could not start.");
+        });
+    }
+}, { once: true });
