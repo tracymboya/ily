@@ -35,9 +35,17 @@ function showPage(page) {
 
     const progress = ((page + 1) / pages.length) * 100;
 
-    progressBar.style.width = progress + "%";
-    pageNumber.textContent = `${page + 1} / ${pages.length}`;
-    pageTitle.textContent = titles[page] || "";
+    if (progressBar) {
+        progressBar.style.width = progress + "%";
+    }
+
+    if (pageNumber) {
+        pageNumber.textContent = `${page + 1} / ${pages.length}`;
+    }
+
+    if (pageTitle) {
+        pageTitle.textContent = titles[page] || "";
+    }
 }
 
 
@@ -58,6 +66,7 @@ function previousPage() {
     }
 }
 
+
 // Save and highlight an answer
 function choose(question, response, button) {
     // Save answer in JavaScript
@@ -70,21 +79,24 @@ function choose(question, response, button) {
         hiddenInput.value = response;
     }
 
-    // Find all answer buttons on the current page
-    const buttons = button
-        .closest(".choices")
-        .querySelectorAll("button");
+    // Find all answer buttons in this group
+    const choices = button.closest(".choices");
 
-    // Remove selection from other answers
-    buttons.forEach((item) => {
-        item.classList.remove("selected");
-    });
+    if (choices) {
+        const buttons = choices.querySelectorAll("button");
+
+        // Remove selection from other answers
+        buttons.forEach((item) => {
+            item.classList.remove("selected");
+        });
+    }
 
     // Highlight the button that was clicked
     button.classList.add("selected");
 
     console.log("Answer saved:", question, response);
 }
+
 
 // Send the form answers
 async function sendAnswers() {
@@ -131,6 +143,7 @@ async function submitMessage() {
     }
 }
 
+
 // Show the final love message
 function showLove() {
     const loveMessage = document.getElementById("loveMessage");
@@ -142,57 +155,59 @@ function showLove() {
 
 
 // Prevent normal form submission
-form.addEventListener("submit", (event) => {
-    event.preventDefault();
-});
+if (form) {
+    form.addEventListener("submit", (event) => {
+        event.preventDefault();
+    });
+}
 
 
+// Music controls
 const music = document.getElementById("bgMusic");
 const musicBtn = document.getElementById("musicBtn");
 
-let isPlaying = false;
+
+// Update the music button appearance
+function updateMusicButton() {
+    if (!music || !musicBtn) return;
+
+    if (music.paused) {
+        musicBtn.classList.remove("playing");
+        musicBtn.innerHTML = "🎵";
+        musicBtn.setAttribute("aria-label", "Play music");
+    } else {
+        musicBtn.classList.add("playing");
+        musicBtn.innerHTML = "🎶";
+        musicBtn.setAttribute("aria-label", "Pause music");
+    }
+}
 
 
-// Play or pause music when the music button is clicked
+// Play or pause music when the button is clicked
 if (music && musicBtn) {
-    musicBtn.addEventListener("click", () => {
+    musicBtn.addEventListener("click", async () => {
         if (music.paused) {
-            music.play()
-                .then(() => {
-                    isPlaying = true;
-                    musicBtn.classList.add("playing");
-                    musicBtn.innerHTML = "🎶";
-                    musicBtn.setAttribute("aria-label", "Pause music");
-                })
-                .catch((error) => {
-                    console.error("Music could not play:", error);
-                });
-
+            try {
+                await music.play();
+            } catch (error) {
+                console.error("Music could not play:", error);
+                alert("The music could not be played. Please try again.");
+            }
         } else {
             music.pause();
-            isPlaying = false;
-            musicBtn.classList.remove("playing");
-            musicBtn.innerHTML = "🎵";
-            musicBtn.setAttribute("aria-label", "Play music");
         }
     });
 
 
-    // Keep the button state correct when music ends or pauses
-    music.addEventListener("pause", () => {
-        isPlaying = false;
-        musicBtn.classList.remove("playing");
-        musicBtn.innerHTML = "🎵";
-        musicBtn.setAttribute("aria-label", "Play music");
-    });
+    // Keep the button state correct
+    music.addEventListener("play", updateMusicButton);
+    music.addEventListener("pause", updateMusicButton);
+    music.addEventListener("ended", updateMusicButton);
 
-    music.addEventListener("play", () => {
-        isPlaying = true;
-        musicBtn.classList.add("playing");
-        musicBtn.innerHTML = "🎶";
-        musicBtn.setAttribute("aria-label", "Pause music");
-    });
+    // Set the correct button state when the page loads
+    updateMusicButton();
 }
 
-showPage(currentPage);
 
+// Start the website on the first page
+showPage(currentPage);
