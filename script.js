@@ -153,3 +153,29 @@ form.addEventListener("submit", (event) => {
 
 // Start the website
 showPage(currentPage);
+/* =========================
+   BACKGROUND MUSIC
+   ========================= */
+
+const music = document.getElementById("bgMusic");
+const musicBtn = document.getElementById("musicBtn");
+
+let isPlaying = false;
+
+// Play or pause music when the music button is clicked
+musicBtn.addEventListener("click", () => {
+    if (isPlaying) {
+        music.pause();
+        musicBtn.classList.remove("playing");
+        musicBtn.innerHTML = "🎵";
+        musicBtn.setAttribute("aria-label", "Play music");
+    } else {
+        music.play();
+        musicBtn.classList.add("playing");
+        musicBtn.innerHTML = "🎶";
+        musicBtn.setAttribute("aria-label", "Pause music");
+    }
+
+    isPlaying = !isPlaying;
+});
+
