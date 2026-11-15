@@ -9,19 +9,38 @@ const form = document.getElementById("beckyForm");
 const answers = {};
 
 const titles = [
+  
+const titles = [
+
     "A message for you",
+
     "My apology",
+
     "Being cool again",
+
     "Good memories",
+
     "Favorite people",
+
     "Being honest",
+
     "Your thoughts",
+
     "Just wondering",
+
     "A random question",
+
     "One last thing",
+
     "Something on my mind 🖤",
+
+    "Chess lessons ♟️",
+
+    "A picture for you 🖤",
+
     "A special message ❤️"
 ];
+
 
 
 // Show the current page
