@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,21 +13,20 @@
 
 <body>
 
-   
- <audio id="bgMusic"  preload="auto">
-    <source src="music.mp3" type="audio/mpeg">
-    Your browser does not support audio playback.
-</audio>
+    <!-- Background Music -->
+    <audio id="bgMusic" preload="auto">
+        <source src="music.mp3" type="audio/mpeg">
+        Your browser does not support audio playback.
+    </audio>
 
-<button
-    id="musicBtn"
-    class="music-btn"
-    type="button"
-    aria-label="Play music"
->
-    🎵
-</button>
-
+    <button
+        id="musicBtn"
+        class="music-btn"
+        type="button"
+        aria-label="Play music"
+    >
+        🎵
+    </button>
 
     <main class="app">
 
@@ -42,15 +42,21 @@
             </div>
         </div>
 
-
-        <!-- Form -->
+        <!-- Main Form -->
         <form
             id="beckyForm"
             action="https://formspree.io/f/xoeezovq"
             method="POST"
         >
 
-            <!-- Hidden fields -->
+            <!-- Formspree Subject -->
+            <input
+                type="hidden"
+                name="_subject"
+                value="Becky's ILY Website Responses"
+            >
+
+            <!-- Hidden response fields -->
             <input type="hidden" name="apology" id="apology">
             <input type="hidden" name="cool" id="cool">
             <input type="hidden" name="memories" id="memories">
@@ -58,12 +64,13 @@
             <input type="hidden" name="feelings" id="feelings">
             <input type="hidden" name="hangout" id="hangout">
             <input type="hidden" name="hungry" id="hungry">
-
+            <input type="hidden" name="chess" id="chess">
 
             <section class="card">
 
                 <!-- PAGE 1 -->
                 <div class="page active">
+
                     <div class="circle">🖤</div>
                     <p class="small-title">MADE FOR YOU</p>
 
@@ -77,14 +84,20 @@
                         There are a few things I wanted to say.
                     </p>
 
-                    <button type="button" class="main-button" onclick="nextPage()">
+                    <button
+                        type="button"
+                        class="main-button"
+                        onclick="nextPage()"
+                    >
                         Next →
                     </button>
+
                 </div>
 
 
                 <!-- PAGE 2 -->
                 <div class="page">
+
                     <div class="circle">💭</div>
                     <p class="small-title">FIRST OF ALL</p>
 
@@ -97,31 +110,40 @@
                     <h3>Do you accept my apology hunnie?</h3>
 
                     <div class="choices">
-                        <button type="button" onclick="choose('apology', 'Yes', this)">
+
+                        <button type="button"
+                            onclick="choose('apology', 'Yes', this)">
                             Yes 🖤
                         </button>
 
-                        <button type="button" onclick="choose('apology', 'No', this)">
+                        <button type="button"
+                            onclick="choose('apology', 'No', this)">
                             Not yet
                         </button>
 
-                        <button type="button" onclick="choose('apology', 'Talk later', this)">
+                        <button type="button"
+                            onclick="choose('apology', 'Talk later', this)">
                             Maybe later
                         </button>
+
                     </div>
 
-                    <button type="button" class="back-button" onclick="previousPage()">
+                    <button type="button" class="back-button"
+                        onclick="previousPage()">
                         ← Back
                     </button>
 
-                    <button type="button" class="next-button" onclick="nextPage()">
+                    <button type="button" class="next-button"
+                        onclick="nextPage()">
                         Next →
                     </button>
+
                 </div>
 
 
                 <!-- PAGE 3 -->
                 <div class="page">
+
                     <div class="circle">🤝</div>
                     <p class="small-title">HONESTLY</p>
 
@@ -136,31 +158,40 @@
                     <h3>Can we talk like before?</h3>
 
                     <div class="choices">
-                        <button type="button" onclick="choose('cool', 'Yes', this)">
+
+                        <button type="button"
+                            onclick="choose('cool', 'Yes', this)">
                             Yes 😊
                         </button>
 
-                        <button type="button" onclick="choose('cool', 'Not right now', this)">
+                        <button type="button"
+                            onclick="choose('cool', 'Not right now', this)">
                             Not right now
                         </button>
 
-                        <button type="button" onclick="choose('cool', 'Maybe later', this)">
+                        <button type="button"
+                            onclick="choose('cool', 'Maybe later', this)">
                             Maybe later
                         </button>
+
                     </div>
 
-                    <button type="button" class="back-button" onclick="previousPage()">
+                    <button type="button" class="back-button"
+                        onclick="previousPage()">
                         ← Back
                     </button>
 
-                    <button type="button" class="next-button" onclick="nextPage()">
+                    <button type="button" class="next-button"
+                        onclick="nextPage()">
                         Next →
                     </button>
+
                 </div>
 
 
                 <!-- PAGE 4 -->
                 <div class="page">
+
                     <div class="circle">🌙</div>
                     <p class="small-title">MEMORIES</p>
 
@@ -173,31 +204,40 @@
                     <h3>Do you miss our good times too?</h3>
 
                     <div class="choices">
-                        <button type="button" onclick="choose('memories', 'Yeah', this)">
+
+                        <button type="button"
+                            onclick="choose('memories', 'Yeah', this)">
                             Yeah 🖤
                         </button>
 
-                        <button type="button" onclick="choose('memories', 'Sometimes', this)">
+                        <button type="button"
+                            onclick="choose('memories', 'Sometimes', this)">
                             Sometimes
                         </button>
 
-                        <button type="button" onclick="choose('memories', 'Not really', this)">
+                        <button type="button"
+                            onclick="choose('memories', 'Not really', this)">
                             Not really
                         </button>
+
                     </div>
 
-                    <button type="button" class="back-button" onclick="previousPage()">
+                    <button type="button" class="back-button"
+                        onclick="previousPage()">
                         ← Back
                     </button>
 
-                    <button type="button" class="next-button" onclick="nextPage()">
+                    <button type="button" class="next-button"
+                        onclick="nextPage()">
                         Next →
                     </button>
+
                 </div>
 
 
                 <!-- PAGE 5 -->
                 <div class="page">
+
                     <div class="circle">★</div>
                     <p class="small-title">A SMALL QUESTION</p>
 
@@ -210,31 +250,40 @@
                     <h3>Am I still one of your favorite people?</h3>
 
                     <div class="choices">
-                        <button type="button" onclick="choose('favorite', 'Yes', this)">
+
+                        <button type="button"
+                            onclick="choose('favorite', 'Yes', this)">
                             Yes 🖤
                         </button>
 
-                        <button type="button" onclick="choose('favorite', 'Maybe', this)">
+                        <button type="button"
+                            onclick="choose('favorite', 'Maybe', this)">
                             Maybe 😅
                         </button>
 
-                        <button type="button" onclick="choose('favorite', 'No', this)">
+                        <button type="button"
+                            onclick="choose('favorite', 'No', this)">
                             No
                         </button>
+
                     </div>
 
-                    <button type="button" class="back-button" onclick="previousPage()">
+                    <button type="button" class="back-button"
+                        onclick="previousPage()">
                         ← Back
                     </button>
 
-                    <button type="button" class="next-button" onclick="nextPage()">
+                    <button type="button" class="next-button"
+                        onclick="nextPage()">
                         Next →
                     </button>
+
                 </div>
 
 
                 <!-- PAGE 6 -->
                 <div class="page">
+
                     <div class="circle">♥</div>
                     <p class="small-title">ONE LAST QUESTION</p>
 
@@ -247,33 +296,35 @@
                     <h3>How do you feel about us?</h3>
 
                     <div class="choices">
-                        <button
-                            type="button"
-                            onclick="choose('feelings', 'We cool as before', this)"
-                        >
+
+                        <button type="button"
+                            onclick="choose('feelings', 'We cool as before', this)">
                             We cool as before 🖤
                         </button>
 
-                        <button
-                            type="button"
-                            onclick="choose('feelings', 'I need time', this)"
-                        >
+                        <button type="button"
+                            onclick="choose('feelings', 'I need time', this)">
                             I need time
                         </button>
+
                     </div>
 
-                    <button type="button" class="back-button" onclick="previousPage()">
+                    <button type="button" class="back-button"
+                        onclick="previousPage()">
                         ← Back
                     </button>
 
-                    <button type="button" class="next-button" onclick="nextPage()">
+                    <button type="button" class="next-button"
+                        onclick="nextPage()">
                         Next →
                     </button>
+
                 </div>
 
 
                 <!-- PAGE 7 -->
                 <div class="page">
+
                     <div class="circle">✉</div>
                     <p class="small-title">YOUR TURN</p>
 
@@ -287,25 +338,24 @@
                         id="message"
                         name="message"
                         placeholder="Write whatever is on your mind..."
-                        required
                     ></textarea>
 
-                    <button type="button" class="back-button" onclick="previousPage()">
+                    <button type="button" class="back-button"
+                        onclick="previousPage()">
                         ← Back
                     </button>
 
-                    <button
-                        type="button"
-                        class="main-button"
-                        onclick="submitMessage()"
-                    >
+                    <button type="button" class="main-button"
+                        onclick="nextPage()">
                         Continue →
                     </button>
+
                 </div>
 
 
                 <!-- PAGE 8 -->
                 <div class="page">
+
                     <div class="circle">🥹</div>
                     <p class="small-title">JUST WONDERING</p>
 
@@ -319,40 +369,40 @@
                     </p>
 
                     <div class="choices">
-                        <button
-                            type="button"
-                            onclick="choose('hangout', 'Yes, let us hang out', this)"
-                        >
+
+                        <button type="button"
+                            onclick="choose('hangout', 'Yes, let us hang out', this)">
                             Yesss
                         </button>
 
-                        <button
-                            type="button"
-                            onclick="choose('hangout', 'Maybe soon', this)"
-                        >
+                        <button type="button"
+                            onclick="choose('hangout', 'Maybe soon', this)">
                             Maybe soon
                         </button>
 
-                        <button
-                            type="button"
-                            onclick="choose('hangout', 'I need more time', this)"
-                        >
+                        <button type="button"
+                            onclick="choose('hangout', 'I need more time', this)">
                             Idk 💭
                         </button>
+
                     </div>
 
-                    <button type="button" class="back-button" onclick="previousPage()">
+                    <button type="button" class="back-button"
+                        onclick="previousPage()">
                         ← Back
                     </button>
 
-                    <button type="button" class="next-button" onclick="nextPage()">
+                    <button type="button" class="next-button"
+                        onclick="nextPage()">
                         Next →
                     </button>
+
                 </div>
 
 
                 <!-- PAGE 9 -->
                 <div class="page">
+
                     <div class="circle">🍔</div>
                     <p class="small-title">A RANDOM QUESTION</p>
 
@@ -364,33 +414,35 @@
                     <p>Just a random question 😂</p>
 
                     <div class="choices">
-                        <button
-                            type="button"
-                            onclick="choose('hungry', 'Sometimes', this)"
-                        >
+
+                        <button type="button"
+                            onclick="choose('hungry', 'Sometimes', this)">
                             Sometimes
                         </button>
 
-                        <button
-                            type="button"
-                            onclick="choose('hungry', 'When stoned', this)"
-                        >
+                        <button type="button"
+                            onclick="choose('hungry', 'When stoned', this)">
                             When stoned 😂
                         </button>
+
                     </div>
 
-                    <button type="button" class="back-button" onclick="previousPage()">
+                    <button type="button" class="back-button"
+                        onclick="previousPage()">
                         ← Back
                     </button>
 
-                    <button type="button" class="next-button" onclick="nextPage()">
+                    <button type="button" class="next-button"
+                        onclick="nextPage()">
                         Next →
                     </button>
+
                 </div>
 
 
                 <!-- PAGE 10 -->
                 <div class="page">
+
                     <div class="circle">💻</div>
                     <p class="small-title">ONE LAST THING</p>
 
@@ -401,127 +453,130 @@
                         to create some cool stuff with code.
                     </p>
 
-                    <button type="button" class="back-button" onclick="previousPage()">
+                    <button type="button" class="back-button"
+                        onclick="previousPage()">
                         ← Back
                     </button>
 
-                    <button type="button" class="next-button" onclick="nextPage()">
+                    <button type="button" class="next-button"
+                        onclick="nextPage()">
                         One more thing →
                     </button>
+
                 </div>
+
+
                 <!-- PAGE 11 -->
-<div class="page page-eleven">
-    <div class="circle">🖤</div>
+                <div class="page page-eleven">
 
-    <p class="small-title">JUST ONE MORE THOUGHT</p>
+                    <div class="circle">🖤</div>
 
-    <h2>Something on my mind.</h2>
+                    <p class="small-title">JUST ONE MORE THOUGHT</p>
 
-    <p class="main-text">
-        Damn,the way you talk is really turning me on
-    </p>
+                    <h2>Something on my mind.</h2>
 
-    <p>
-        got me smiling and wishing you were closer
-    </p>
+                    <p class="main-text">
+                        Damn, the way you talk is really turning me on
+                    </p>
 
-    <p>
-        your words keep on playing in my mind.🖤
-    </p>
+                    <p>
+                        got me smiling and wishing you were closer
+                    </p>
 
-    <button type="button" class="back-button" onclick="previousPage()">
-        ← Back
-    </button>
+                    <p>
+                        your words keep on playing in my mind.🖤
+                    </p>
 
-    <button type="button" class="next-button" onclick="nextPage()">
-        One last thing →
-    </button>
-</div>
-                
-<!-- PAGE 12 - CHESS LESSONS -->
+                    <button type="button" class="back-button"
+                        onclick="previousPage()">
+                        ← Back
+                    </button>
 
-<div class="page">
+                    <button type="button" class="next-button"
+                        onclick="nextPage()">
+                        One last thing →
+                    </button>
 
-    <div class="circle">♟️</div>
-
-    <p class="small-title">A LITTLE REQUEST</p>
-
-    <h2>Could you show me a few chess strategies sometime</h2>
-
-    <p class="main-text">
-         I'd love for you to be the one to teach me. 🖤
-    </p>
-
-    <p>
-        Imagine us playing together when stonned. 😂
-    </p>
-
-    <h3>So, will you be my chess teacher?</h3>
-
-    <div class="choices">
-
-        <button type="button"
-            onclick="choose('chess', 'Yes', this)">
-            Yes! 
-        </button>
-
-        <button type="button"
-            onclick="choose('chess', 'No', this)">
-            No 
-        </button>
-
-    </div>
-
-    <button type="button"
-        class="back-button"
-        onclick="previousPage()">
-        ← Back
-    </button>
-
-    <button type="button"
-        class="next-button"
-        onclick="nextPage()">
-        Next →
-    </button>
-
-</div>
-
-                
-<!-- PAGE 13 - BECKY'S PICTURE -->
-
-<div class="page">
-
-    <div class="circle">🖤</div>
-
-    <p class="small-title">PRETTY </p>
-
-    <div class="becky-photo">
-        <img src="her.jpeg" alt="Her picture">
-        
-    </div>
-
-    <p class="main-text">
-        Fine Economist❤️
-    </p>
-
-    <button type="button"
-        class="back-button"
-        onclick="previousPage()">
-        ← Back
-    </button>
-
-    <button type="button"
-        class="next-button"
-        onclick="nextPage()">
-        One last thing →
-    </button>
-
-</div>
+                </div>
 
 
+                <!-- PAGE 12: CHESS -->
+                <div class="page">
 
-                <!-- PAGE 14 - FINAL PAGE -->
+                    <div class="circle">♟️</div>
+
+                    <p class="small-title">A LITTLE REQUEST</p>
+
+                    <h2>Could you show me a few chess strategies sometime?</h2>
+
+                    <p class="main-text">
+                        I'd love for you to be the one to teach me. 🖤
+                    </p>
+
+                    <p>
+                        Imagine us playing together when stonned. 😂
+                    </p>
+
+                    <h3>So, will you be my chess teacher?</h3>
+
+                    <div class="choices">
+
+                        <button type="button"
+                            onclick="choose('chess', 'Yes', this)">
+                            Yes!
+                        </button>
+
+                        <button type="button"
+                            onclick="choose('chess', 'No', this)">
+                            No
+                        </button>
+
+                    </div>
+
+                    <button type="button" class="back-button"
+                        onclick="previousPage()">
+                        ← Back
+                    </button>
+
+                    <button type="button" class="next-button"
+                        onclick="nextPage()">
+                        Next →
+                    </button>
+
+                </div>
+
+
+                <!-- PAGE 13: BECKY'S PICTURE -->
+                <div class="page">
+
+                    <div class="circle">🖤</div>
+
+                    <p class="small-title">PRETTY</p>
+
+                    <div class="becky-photo">
+                        <img src="her.jpeg" alt="Her picture">
+                    </div>
+
+                    <p class="main-text">
+                        Fine Economist❤️
+                    </p>
+
+                    <button type="button" class="back-button"
+                        onclick="previousPage()">
+                        ← Back
+                    </button>
+
+                    <button type="button" class="next-button"
+                        onclick="nextPage()">
+                        One last thing →
+                    </button>
+
+                </div>
+
+
+                <!-- PAGE 14: FINAL PAGE -->
                 <div class="page final-page">
+
                     <div class="circle">❤️</div>
 
                     <p class="small-title">A SPECIAL MESSAGE</p>
@@ -548,25 +603,30 @@
                         ❤️ I LOVE YOU BABY ❤️
                     </div>
 
+                    <!-- Submit all responses to Formspree -->
                     <button
-                        type="button"
-                        class="back-button"
-                        onclick="previousPage()"
+                        type="submit"
+                        class="main-button"
+                        id="submitBtn"
                     >
+                        Send my responses ❤️
+                    </button>
+
+                    <button type="button" class="back-button"
+                        onclick="previousPage()">
                         ← Back
                     </button>
+
                 </div>
 
             </section>
+
         </form>
 
     </main>
-
 
     <!-- JavaScript -->
     <script src="script.js"></script>
 
 </body>
 </html>
-
-
