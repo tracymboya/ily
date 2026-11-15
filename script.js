@@ -9,8 +9,6 @@ const form = document.getElementById("beckyForm");
 const answers = {};
 
 const titles = [
-  
-const titles = [
 
     "A message for you",
 
