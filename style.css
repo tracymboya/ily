@@ -1,5 +1,14 @@
+
+/* =================================
+   GLOBAL SETTINGS
+================================= */
+
 * {
     box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
 }
 
 body {
@@ -15,15 +24,20 @@ body {
 }
 
 
-/* =========================
+/* =================================
    MAIN APP
-========================= */
+================================= */
 
 .app {
     width: 100%;
     max-width: 650px;
+    margin: auto;
 }
 
+
+/* =================================
+   PROGRESS AREA
+================================= */
 
 .progress-area {
     margin-bottom: 18px;
@@ -32,12 +46,13 @@ body {
 .progress-text {
     display: flex;
     justify-content: space-between;
-    color: #999;
+    color: #999999;
     font-size: 13px;
     margin-bottom: 8px;
 }
 
 .progress-track {
+    width: 100%;
     height: 5px;
     background: #292929;
     border-radius: 20px;
@@ -48,25 +63,34 @@ body {
     height: 100%;
     width: 0;
     background: #cfcfcf;
+    border-radius: 20px;
     transition: width 0.4s ease;
 }
 
 
-/* =========================
-   CARD AND PAGES
-========================= */
+/* =================================
+   MAIN CARD
+================================= */
 
 .card {
+    width: 100%;
     background: #191919;
-    border: 1px solid #333;
+    border: 1px solid #333333;
     border-radius: 25px;
     padding: 45px;
     min-height: 520px;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
 }
+
+
+/* =================================
+   PAGE TRANSITIONS
+================================= */
 
 .page {
     display: none;
+    width: 100%;
     text-align: center;
     animation: appear 0.5s ease;
 }
@@ -88,22 +112,9 @@ body {
 }
 
 
-/* =========================
-   TEXT AND ICONS
-========================= */
-
-.circle {
-    width: 70px;
-    height: 70px;
-    margin: 0 auto 15px;
-    background: #282828;
-    border: 1px solid #404040;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 30px;
-}
+/* =================================
+   TEXT AND HEADINGS
+================================= */
 
 h1,
 h2 {
@@ -136,16 +147,34 @@ p {
 }
 
 .small-title {
-    color: #777;
+    color: #777777;
     font-size: 11px;
     font-weight: bold;
     letter-spacing: 3px;
 }
 
 
-/* =========================
+/* =================================
+   CIRCLE ICONS
+================================= */
+
+.circle {
+    width: 70px;
+    height: 70px;
+    margin: 0 auto 15px;
+    background: #282828;
+    border: 1px solid #404040;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+}
+
+
+/* =================================
    CHOICES
-========================= */
+================================= */
 
 .choices {
     display: flex;
@@ -173,21 +202,21 @@ p {
 
 .choices button.selected {
     background: #e5e5e5;
-    color: #111;
+    color: #111111;
     border-color: #ffffff;
 }
 
 
-/* =========================
-   BUTTONS
-========================= */
+/* =================================
+   MAIN AND NEXT BUTTONS
+================================= */
 
 .main-button,
 .next-button {
     margin-top: 25px;
     padding: 14px 28px;
     background: #e5e5e5;
-    color: #111;
+    color: #111111;
     border: none;
     border-radius: 12px;
     font-size: 16px;
@@ -202,13 +231,24 @@ p {
     transform: translateY(-2px);
 }
 
+.main-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+
+/* =================================
+   BACK BUTTON
+================================= */
+
 .back-button {
     margin-top: 25px;
     margin-right: 10px;
     padding: 12px 22px;
     background: transparent;
     color: #cccccc;
-    border: 1px solid #555;
+    border: 1px solid #555555;
     border-radius: 12px;
     font-size: 15px;
     cursor: pointer;
@@ -221,9 +261,9 @@ p {
 }
 
 
-/* =========================
+/* =================================
    MESSAGE BOX
-========================= */
+================================= */
 
 textarea {
     width: 100%;
@@ -232,7 +272,7 @@ textarea {
     padding: 15px;
     background: #252525;
     color: #ffffff;
-    border: 1px solid #444;
+    border: 1px solid #444444;
     border-radius: 14px;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 16px;
@@ -241,23 +281,23 @@ textarea {
 }
 
 textarea:focus {
-    border-color: #aaa;
+    border-color: #aaaaaa;
 }
 
 textarea::placeholder {
-    color: #777;
+    color: #777777;
 }
 
 
-/* =========================
+/* =================================
    LOVE MESSAGE
-========================= */
+================================= */
 
 .love-button {
     margin-top: 25px;
     padding: 16px 35px;
     background: #ffffff;
-    color: #111;
+    color: #111111;
     border: none;
     border-radius: 30px;
     font-size: 18px;
@@ -292,9 +332,9 @@ textarea::placeholder {
 }
 
 
-/* =========================
+/* =================================
    MUSIC BUTTON
-========================= */
+================================= */
 
 .music-btn {
     position: fixed;
@@ -302,7 +342,7 @@ textarea::placeholder {
     right: 20px;
     width: 54px;
     height: 54px;
-    border: 1px solid #555;
+    border: 1px solid #555555;
     border-radius: 50%;
     background: #282828;
     color: #ffffff;
@@ -325,11 +365,10 @@ textarea::placeholder {
     transform: scale(0.95);
 }
 
-/* Animation when the music is playing */
 .music-btn.playing {
     animation: musicPulse 1.5s ease-in-out infinite;
     background: #e5e5e5;
-    color: #111;
+    color: #111111;
 }
 
 @keyframes musicPulse {
@@ -344,48 +383,10 @@ textarea::placeholder {
 }
 
 
-/* =========================
-   MOBILE DESIGN
-========================= */
+/* =================================
+   PAGE 11
+================================= */
 
-@media (max-width: 600px) {
-
-    body {
-        padding: 15px;
-        align-items: flex-start;
-    }
-
-    .card {
-        padding: 30px 20px;
-        min-height: 500px;
-    }
-
-    h1 {
-        font-size: 30px;
-    }
-
-    h2 {
-        font-size: 24px;
-    }
-
-    .choices button {
-        font-size: 15px;
-    }
-
-    .love-message {
-        font-size: 22px;
-    }
-
-    /* Keep the music button easy to tap on phones */
-    .music-btn {
-        top: 12px;
-        right: 12px;
-        width: 50px;
-        height: 50px;
-        font-size: 22px;
-    }
-}
-/* Page 11 styling */
 .page-eleven {
     text-align: center;
 }
@@ -400,15 +401,17 @@ textarea::placeholder {
 }
 
 
-/* HER PHOTO */
+/* =================================
+   HER PHOTO
+================================= */
 
 .her-photo {
-    margin: 25px auto;
-    max-width: 340px;
     width: 90%;
+    max-width: 340px;
+    margin: 25px auto;
     padding: 8px;
     background: #282828;
-    border: 1px solid #555;
+    border: 1px solid #555555;
     border-radius: 20px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
     overflow: hidden;
@@ -417,7 +420,7 @@ textarea::placeholder {
 .her-photo img {
     display: block;
     width: 100%;
-    max-height: 400px;
+    max-height: 350px;
     object-fit: cover;
     object-position: center;
     border-radius: 14px;
@@ -428,20 +431,25 @@ textarea::placeholder {
     transform: scale(1.03);
 }
 
+
 /* =================================
-   BECKY'S PICTURE - PAGE 13
+   BECKY'S PHOTO - PAGE 13
 ================================= */
 
 .becky-photo {
-    width: 100%;
-    max-width: 280px;
-    height: 300px;
+    width: 75%;
+    max-width: 220px;
+    height: 240px;
     margin: 20px auto;
-    overflow: hidden;
+    padding: 6px;
+    background: #282828;
+    border: 1px solid #555555;
     border-radius: 18px;
+    overflow: hidden;
     display: flex;
     justify-content: center;
     align-items: center;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
 }
 
 .becky-photo img {
@@ -450,13 +458,122 @@ textarea::placeholder {
     object-fit: cover;
     object-position: center;
     display: block;
-    border-radius: 18px;
+    border-radius: 13px;
 }
 
-/* Smaller screens */
-@media (max-width: 480px) {
+
+/* =================================
+   SUBMISSION STATUS
+================================= */
+
+#submitStatus {
+    margin-top: 15px;
+    font-size: 14px;
+    color: #cccccc;
+}
+
+
+/* =================================
+   MOBILE RESPONSIVENESS
+================================= */
+
+@media (max-width: 600px) {
+
+    body {
+        padding: 15px;
+        align-items: flex-start;
+    }
+
+    .app {
+        margin-top: 55px;
+    }
+
+    .card {
+        padding: 30px 20px;
+        min-height: 500px;
+        border-radius: 20px;
+    }
+
+    h1 {
+        font-size: 30px;
+    }
+
+    h2 {
+        font-size: 24px;
+    }
+
+    h3 {
+        font-size: 19px;
+    }
+
+    p {
+        font-size: 15px;
+    }
+
+    .main-text {
+        font-size: 16px;
+    }
+
+    .choices button {
+        font-size: 15px;
+    }
+
+    .love-message {
+        font-size: 22px;
+    }
+
+    .music-btn {
+        top: 12px;
+        right: 12px;
+        width: 50px;
+        height: 50px;
+        font-size: 22px;
+    }
+
+    .her-photo {
+        max-width: 280px;
+    }
+
+    .her-photo img {
+        max-height: 300px;
+    }
+
     .becky-photo {
-        max-width: 230px;
-        height: 260px;
+        max-width: 190px;
+        height: 210px;
+    }
+}
+
+
+/* =================================
+   VERY SMALL SCREENS
+================================= */
+
+@media (max-width: 360px) {
+
+    body {
+        padding: 10px;
+    }
+
+    .card {
+        padding: 25px 15px;
+    }
+
+    h1 {
+        font-size: 26px;
+    }
+
+    h2 {
+        font-size: 22px;
+    }
+
+    .main-button,
+    .next-button {
+        width: 100%;
+        padding: 13px 15px;
+    }
+
+    .back-button {
+        margin-right: 0;
     }
 }
