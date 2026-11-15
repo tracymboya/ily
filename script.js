@@ -1,496 +1,424 @@
 
-// Current page
-let currentPage = 0;
+document.addEventListener("DOMContentLoaded", function () {
 
-// Get all pages
-const pages = document.querySelectorAll(".page");
+    // =====================================
+    // PAGE NAVIGATION
+    // =====================================
 
-// Get page elements
-const progressBar = document.getElementById("progressBar");
-const pageNumber = document.getElementById("pageNumber");
-const pageTitle = document.getElementById("pageTitle");
+    let currentPage = 0;
 
-// Get form
-const form = document.getElementById("beckyForm");
+    const pages = document.querySelectorAll(".page");
+    const progressBar = document.getElementById("progressBar");
+    const pageNumber = document.getElementById("pageNumber");
+    const pageTitle = document.getElementById("pageTitle");
 
-// Store answers
-const answers = {};
+    const form = document.getElementById("beckyForm");
 
+    const titles = [
+        "A message for you",
+        "My apology",
+        "Being cool again",
+        "Good memories",
+        "Favorite people",
+        "Being honest",
+        "Your thoughts",
+        "Just wondering",
+        "A random question",
+        "One last thing",
+        "Something on my mind 🖤",
+        "Chess lessons ♟️",
+        "A picture for you 🖤",
+        "A special message ❤️"
+    ];
 
-// ========================================
-// PAGE TITLES
-// ========================================
+    const answers = {};
 
-const titles = [
-    "A message for you",
-    "My apology",
-    "Being cool again",
-    "Good memories",
-    "Favorite people",
-    "Being honest",
-    "Your thoughts",
-    "Just wondering",
-    "A random question",
-    "One last thing",
-    "Something on my mind 🖤",
-    "Chess lessons ♟️",
-    "A picture for you 🖤",
-    "A special message ❤️"
-];
+    // Display page
+    function showPage(page) {
 
+        pages.forEach(item => {
+            item.classList.remove("active");
+        });
 
-// ========================================
-// DISPLAY CURRENT PAGE
-// ========================================
-
-function showPage(page) {
-
-    pages.forEach((item) => {
-        item.classList.remove("active");
-    });
-
-    if (pages[page]) {
         pages[page].classList.add("active");
-    }
 
-    // Update progress
-    const progress = ((page + 1) / pages.length) * 100;
+        const progress = ((page + 1) / pages.length) * 100;
 
-    if (progressBar) {
         progressBar.style.width = progress + "%";
-    }
 
-    // Update page number
-    if (pageNumber) {
         pageNumber.textContent =
             `${page + 1} / ${pages.length}`;
+
+        pageTitle.textContent = titles[page];
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
     }
 
-    // Update page title
-    if (pageTitle) {
-        pageTitle.textContent = titles[page] || "";
-    }
+    // Next page
+    window.nextPage = function () {
 
-    // Scroll to top when changing pages
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-    });
-}
+        const current = pages[currentPage];
 
+        const choices = current.querySelector(".choices");
 
-// ========================================
-// NEXT PAGE
-// ========================================
+        if (choices) {
 
-function nextPage() {
+            const selected = choices.querySelector(".selected");
 
-    const currentPageElement = pages[currentPage];
-
-    if (!currentPageElement) return;
-
-    // Check if current page has answer choices
-    const choices = currentPageElement.querySelector(".choices");
-
-    if (choices) {
-
-        const selectedAnswer =
-            choices.querySelector("button.selected");
-
-        if (!selectedAnswer) {
-            alert("Please choose an answer before continuing 😊");
-            return;
+            if (!selected) {
+                alert("Please choose an answer before continuing 😊");
+                return;
+            }
         }
-    }
 
-    // Move to next page
-    if (currentPage < pages.length - 1) {
+        if (currentPage < pages.length - 1) {
 
-        currentPage++;
+            currentPage++;
 
-        showPage(currentPage);
+            showPage(currentPage);
 
-    }
-}
+        }
+    };
 
+    // Previous page
+    window.previousPage = function () {
 
-// ========================================
-// PREVIOUS PAGE
-// ========================================
+        if (currentPage > 0) {
 
-function previousPage() {
+            currentPage--;
 
-    if (currentPage > 0) {
+            showPage(currentPage);
 
-        currentPage--;
-
-        showPage(currentPage);
-
-    }
-}
+        }
+    };
 
 
-// ========================================
-// SAVE ANSWERS
-// ========================================
+    // =====================================
+    // SAVE ANSWERS
+    // =====================================
 
-function choose(question, response, button) {
+    window.choose = function (question, response, button) {
 
-    // Save response
-    answers[question] = response;
+        answers[question] = response;
 
-    // Get hidden Formspree input
-    const hiddenInput = document.getElementById(question);
+        const hiddenInput = document.getElementById(question);
 
-    if (hiddenInput) {
-        hiddenInput.value = response;
-    }
+        if (hiddenInput) {
+            hiddenInput.value = response;
+        }
 
-    // Get answer buttons
-    const choices = button.closest(".choices");
+        const choices = button.closest(".choices");
 
-    if (choices) {
-
-        const buttons = choices.querySelectorAll("button");
-
-        // Remove previous selection
-        buttons.forEach((item) => {
+        choices.querySelectorAll("button").forEach(item => {
             item.classList.remove("selected");
         });
 
-    }
+        button.classList.add("selected");
 
-    // Highlight selected answer
-    button.classList.add("selected");
+        console.log("Saved:", question, response);
 
-    console.log("Answer saved:", question, response);
-
-}
+    };
 
 
-// ========================================
-// FORM DATA
-// ========================================
+    // =====================================
+    // PAGE 7 MESSAGE
+    // =====================================
 
-function updateFormData() {
+    window.submitMessage = function () {
 
-    // Save all answers into their hidden fields
-    Object.keys(answers).forEach((question) => {
+        const messageInput = document.getElementById("message");
 
-        const input = document.getElementById(question);
+        if (!messageInput.value.trim()) {
 
-        if (input) {
-            input.value = answers[question];
+            alert("Please write a message before continuing 🖤");
+
+            return;
         }
 
-    });
-
-    // Save written message
-    const messageInput = document.getElementById("message");
-
-    if (messageInput) {
         answers.message = messageInput.value.trim();
-    }
 
-}
+        nextPage();
+
+    };
 
 
-// ========================================
-// SUBMIT TO FORMSPREE
-// ========================================
+    // =====================================
+    // FINAL LOVE MESSAGE
+    // =====================================
 
-async function sendAnswers() {
+    window.showLove = function () {
 
-    updateFormData();
+        const loveMessage = document.getElementById("loveMessage");
 
-    const formData = new FormData(form);
+        if (loveMessage) {
 
-    try {
+            loveMessage.style.display = "block";
 
-        const response = await fetch(form.action, {
+        }
 
-            method: "POST",
+    };
 
-            body: formData,
 
-            headers: {
-                Accept: "application/json"
+    // =====================================
+    // FORMSPREE SUBMISSION
+    // =====================================
+
+    if (form) {
+
+        form.addEventListener("submit", async function (event) {
+
+            event.preventDefault();
+
+            const submitBtn = document.getElementById("submitBtn");
+
+            const status = document.getElementById("submitStatus");
+
+            if (submitBtn.disabled) return;
+
+            // Update all hidden fields
+            Object.keys(answers).forEach(question => {
+
+                const input = document.getElementById(question);
+
+                if (input) {
+                    input.value = answers[question];
+                }
+
+            });
+
+            // Save message
+            const messageInput = document.getElementById("message");
+
+            if (messageInput) {
+                messageInput.value = messageInput.value.trim();
+            }
+
+            submitBtn.disabled = true;
+
+            submitBtn.textContent = "Sending... ❤️";
+
+            if (status) {
+                status.textContent = "";
+            }
+
+            try {
+
+                const response = await fetch(form.action, {
+
+                    method: "POST",
+
+                    body: new FormData(form),
+
+                    headers: {
+                        Accept: "application/json"
+                    }
+
+                });
+
+                if (!response.ok) {
+                    throw new Error("Formspree submission failed");
+                }
+
+                submitBtn.textContent = "Responses sent ❤️";
+
+                if (status) {
+                    status.textContent =
+                        "Thank you! Your responses have been received. 🖤";
+                }
+
+                // Keep the final page and Back button visible.
+
+            } catch (error) {
+
+                console.error("Form submission error:", error);
+
+                submitBtn.disabled = false;
+
+                submitBtn.textContent = "Send my responses ❤️";
+
+                if (status) {
+                    status.textContent =
+                        "Submission failed. Please check your connection and try again.";
+                }
+
             }
 
         });
 
-        if (response.ok) {
-
-            console.log("Responses successfully submitted!");
-
-            return true;
-
-        } else {
-
-            const result = await response.json().catch(() => null);
-
-            console.error("Formspree error:", result);
-
-            return false;
-
-        }
-
-    } catch (error) {
-
-        console.error("Submission error:", error);
-
-        return false;
-
     }
 
-}
 
+    // =====================================
+    // MUSIC PLAYLIST
+    // =====================================
 
-// ========================================
-// PAGE 7 MESSAGE
-// ========================================
+    const music = document.getElementById("bgMusic");
 
-// Continue without submitting the form.
-// All answers will be submitted together on page 14.
+    const musicBtn = document.getElementById("musicBtn");
 
-function submitMessage() {
+    const playlist = [
+        "music.mp3",
+        "song2.mp3"
+    ];
 
-    const messageInput = document.getElementById("message");
+    let currentTrack = 0;
 
-    if (!messageInput.value.trim()) {
+    let isSwitchingTrack = false;
 
-        alert("You can write something before continuing 🖤");
+    const failedTracks = new Set();
 
-        return;
+    // Update music button
+    function updateMusicButton() {
 
-    }
-
-    answers.message = messageInput.value.trim();
-
-    nextPage();
-
-}
-
-
-// ========================================
-// FINAL LOVE MESSAGE
-// ========================================
-
-function showLove() {
-
-    const loveMessage = document.getElementById("loveMessage");
-
-    if (loveMessage) {
-
-        loveMessage.style.display = "block";
-
-    }
-
-}
-
-
-// ========================================
-// FINAL FORM SUBMISSION
-// ========================================
-
-if (form) {
-
-    form.addEventListener("submit", async function(event) {
-
-        event.preventDefault();
-
-        const submitBtn = document.getElementById("submitBtn");
-
-        // Prevent multiple submissions
-        if (submitBtn.disabled) return;
-
-        submitBtn.disabled = true;
-
-        submitBtn.textContent = "Sending... ❤️";
-
-        const sent = await sendAnswers();
-
-        if (sent) {
-
-            submitBtn.textContent = "Sent successfully ❤️";
-
-            // Display confirmation
-            const card = document.querySelector(".card");
-
-            card.innerHTML = `
-                <div class="page active">
-                    <div class="circle">❤️</div>
-
-                    <p class="small-title">THANK YOU</p>
-
-                    <h1>Message received!</h1>
-
-                    <p class="main-text">
-                        Thank you for taking your time
-                        to go through this little space.
-                    </p>
-
-                    <p>
-                        Your responses mean a lot to me. 🖤
-                    </p>
-                </div>
-            `;
-
-        } else {
-
-            submitBtn.disabled = false;
-
-            submitBtn.textContent = "Send my responses ❤️";
-
-            alert(
-                "Something went wrong. Please check your internet connection and try again."
-            );
-
-        }
-
-    });
-
-}
-
-
-// ========================================
-// MUSIC CONTROLS
-// ========================================
-
-const music = document.getElementById("bgMusic");
-
-const musicBtn = document.getElementById("musicBtn");
-
-
-// Playlist
-const playlist = [
-    "music.mp3",
-    "song2.mp3"
-];
-
-let currentTrack = 0;
-
-
-// Load first song
-if (music && playlist.length > 0) {
-
-    music.src = playlist[currentTrack];
-
-    music.load();
-
-}
-
-
-// ========================================
-// UPDATE MUSIC BUTTON
-// ========================================
-
-function updateMusicButton() {
-
-    if (!music || !musicBtn) return;
-
-    if (music.paused) {
-
-        musicBtn.classList.remove("playing");
-
-        musicBtn.textContent = "🎵";
-
-        musicBtn.setAttribute(
-            "aria-label",
-            "Play music"
-        );
-
-    } else {
-
-        musicBtn.classList.add("playing");
-
-        musicBtn.textContent = "🎶";
-
-        musicBtn.setAttribute(
-            "aria-label",
-            "Pause music"
-        );
-
-    }
-
-}
-
-
-// ========================================
-// PLAY AND PAUSE MUSIC
-// ========================================
-
-if (music && musicBtn) {
-
-    musicBtn.addEventListener("click", async function() {
+        if (!music || !musicBtn) return;
 
         if (music.paused) {
 
-            try {
+            musicBtn.textContent = "🎵";
 
-                await music.play();
+            musicBtn.classList.remove("playing");
 
-            } catch (error) {
-
-                console.error("Music playback error:", error);
-
-                alert(
-                    "Music could not be played. Please try again."
-                );
-
-            }
+            musicBtn.setAttribute("aria-label", "Play music");
 
         } else {
 
-            music.pause();
+            musicBtn.textContent = "🎶";
+
+            musicBtn.classList.add("playing");
+
+            musicBtn.setAttribute("aria-label", "Pause music");
 
         }
 
-    });
+    }
 
+    // Play selected track
+    async function playTrack(index) {
 
-    // Update button when music starts
-    music.addEventListener("play", updateMusicButton);
+        if (!music || !musicBtn) return;
 
+        currentTrack = index;
 
-    // Update button when music pauses
-    music.addEventListener("pause", updateMusicButton);
-
-
-    // Automatically play next song
-    music.addEventListener("ended", function() {
-
-        currentTrack++;
-
-        // Restart playlist after the last song
-        if (currentTrack >= playlist.length) {
-
-            currentTrack = 0;
-
-        }
+        isSwitchingTrack = true;
 
         music.src = playlist[currentTrack];
 
         music.load();
 
-        music.play().catch(error => {
+        try {
 
-            console.error("Next song playback error:", error);
+            await music.play();
+
+            isSwitchingTrack = false;
+
+        } catch (error) {
+
+            isSwitchingTrack = false;
+
+            console.error("Music playback error:", error);
+
+            // Try the other song if this one cannot play
+            if (!failedTracks.has(currentTrack)) {
+
+                failedTracks.add(currentTrack);
+
+                const nextTrack = (currentTrack + 1) % playlist.length;
+
+                if (!failedTracks.has(nextTrack)) {
+
+                    playTrack(nextTrack);
+
+                } else {
+
+                    musicBtn.textContent = "🎵";
+
+                    alert("Music could not be played. Please check the audio files.");
+
+                }
+
+            }
+
+        }
+
+    }
+
+    // Play and pause button
+    if (music && musicBtn) {
+
+        musicBtn.addEventListener("click", function () {
+
+            if (music.paused) {
+
+                if (failedTracks.size === playlist.length) {
+                    failedTracks.clear();
+                }
+
+                playTrack(currentTrack);
+
+            } else {
+
+                music.pause();
+
+            }
 
         });
 
-    });
+        // When a song ends, play the next song
+        music.addEventListener("ended", function () {
+
+            if (isSwitchingTrack) return;
+
+            const nextTrack = (currentTrack + 1) % playlist.length;
+
+            if (!failedTracks.has(nextTrack)) {
+
+                playTrack(nextTrack);
+
+            } else {
+
+                playTrack(currentTrack);
+
+            }
+
+        });
+
+        // Handle missing or damaged audio files
+        music.addEventListener("error", function () {
+
+            if (isSwitchingTrack) return;
+
+            if (!failedTracks.has(currentTrack)) {
+
+                failedTracks.add(currentTrack);
+
+                const nextTrack = (currentTrack + 1) % playlist.length;
+
+                if (!failedTracks.has(nextTrack)) {
+                    playTrack(nextTrack);
+                } else {
+                    updateMusicButton();
+                }
+
+            }
+
+        });
+
+        music.addEventListener("play", updateMusicButton);
+
+        music.addEventListener("pause", updateMusicButton);
+
+        updateMusicButton();
+
+    }
 
 
-    // Initial button state
-    updateMusicButton();
+    // =====================================
+    // START WEBSITE
+    // =====================================
 
-}
+    showPage(currentPage);
 
-
-// ========================================
-// START WEBSITE
-// ========================================
-
-showPage(currentPage);
-
+});
