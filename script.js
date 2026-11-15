@@ -196,9 +196,72 @@ if (form) {
 }
 
 
-// Music controls
+
+// ===============================
+// MUSIC CONTROLS
+// ===============================
+
 const music = document.getElementById("bgMusic");
 const musicBtn = document.getElementById("musicBtn");
+
+// MUSIC PLAYLIST
+const playlist = [
+    "music.mp3",
+    "song2.mp3"
+];
+
+let currentTrack = 0;
+
+// LOAD FIRST SONG
+music.src = playlist[currentTrack];
+music.load();
+
+
+// PLAY AND PAUSE MUSIC
+musicBtn.addEventListener("click", () => {
+
+    if (music.paused) {
+
+        music.play().catch(error => {
+            console.log("Music playback error:", error);
+        });
+
+    } else {
+
+        music.pause();
+
+    }
+
+});
+
+
+// AUTOMATICALLY PLAY NEXT SONG
+music.addEventListener("ended", () => {
+
+    currentTrack++;
+
+    // Return to the first song after the second
+    if (currentTrack >= playlist.length) {
+        currentTrack = 0;
+    }
+
+    music.src = playlist[currentTrack];
+    music.load();
+
+    music.play().catch(error => {
+        console.log("Next song playback error:", error);
+    });
+
+});
+
+// UPDATE MUSIC BUTTON
+music.addEventListener("play", () => {
+    musicBtn.textContent = "⏸";
+});
+
+music.addEventListener("pause", () => {
+    musicBtn.textContent = "▶";
+});
 
 
 // Update the music button appearance
