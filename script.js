@@ -1,48 +1,50 @@
+
+// Current page
 let currentPage = 0;
 
+// Get all pages
 const pages = document.querySelectorAll(".page");
+
+// Get page elements
 const progressBar = document.getElementById("progressBar");
 const pageNumber = document.getElementById("pageNumber");
 const pageTitle = document.getElementById("pageTitle");
+
+// Get form
 const form = document.getElementById("beckyForm");
 
+// Store answers
 const answers = {};
 
+
+// ========================================
+// PAGE TITLES
+// ========================================
+
 const titles = [
-
     "A message for you",
-
     "My apology",
-
     "Being cool again",
-
     "Good memories",
-
     "Favorite people",
-
     "Being honest",
-
     "Your thoughts",
-
     "Just wondering",
-
     "A random question",
-
     "One last thing",
-
     "Something on my mind 🖤",
-
     "Chess lessons ♟️",
-
     "A picture for you 🖤",
-
     "A special message ❤️"
 ];
 
 
+// ========================================
+// DISPLAY CURRENT PAGE
+// ========================================
 
-// Show the current page
 function showPage(page) {
+
     pages.forEach((item) => {
         item.classList.remove("active");
     });
@@ -51,31 +53,49 @@ function showPage(page) {
         pages[page].classList.add("active");
     }
 
+    // Update progress
     const progress = ((page + 1) / pages.length) * 100;
 
     if (progressBar) {
         progressBar.style.width = progress + "%";
     }
 
+    // Update page number
     if (pageNumber) {
-        pageNumber.textContent = `${page + 1} / ${pages.length}`;
+        pageNumber.textContent =
+            `${page + 1} / ${pages.length}`;
     }
 
+    // Update page title
     if (pageTitle) {
         pageTitle.textContent = titles[page] || "";
     }
+
+    // Scroll to top when changing pages
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
 }
 
 
+// ========================================
+// NEXT PAGE
+// ========================================
+
 function nextPage() {
+
     const currentPageElement = pages[currentPage];
 
-    // Check whether this page has answer choices
+    if (!currentPageElement) return;
+
+    // Check if current page has answer choices
     const choices = currentPageElement.querySelector(".choices");
 
     if (choices) {
-        // Check whether Becky selected an answer
-        const selectedAnswer = choices.querySelector("button.selected");
+
+        const selectedAnswer =
+            choices.querySelector("button.selected");
 
         if (!selectedAnswer) {
             alert("Please choose an answer before continuing 😊");
@@ -83,126 +103,266 @@ function nextPage() {
         }
     }
 
-    // Move to the next page only if an answer was selected
+    // Move to next page
     if (currentPage < pages.length - 1) {
+
         currentPage++;
+
         showPage(currentPage);
+
     }
 }
 
-// Go to the previous page
+
+// ========================================
+// PREVIOUS PAGE
+// ========================================
+
 function previousPage() {
+
     if (currentPage > 0) {
+
         currentPage--;
+
         showPage(currentPage);
+
     }
 }
 
 
-// Save and highlight an answer
+// ========================================
+// SAVE ANSWERS
+// ========================================
+
 function choose(question, response, button) {
-    // Save answer in JavaScript
+
+    // Save response
     answers[question] = response;
 
-    // Save answer in the hidden Formspree field
+    // Get hidden Formspree input
     const hiddenInput = document.getElementById(question);
 
     if (hiddenInput) {
         hiddenInput.value = response;
     }
 
-    // Find all answer buttons in this group
+    // Get answer buttons
     const choices = button.closest(".choices");
 
     if (choices) {
+
         const buttons = choices.querySelectorAll("button");
 
-        // Remove selection from other answers
+        // Remove previous selection
         buttons.forEach((item) => {
             item.classList.remove("selected");
         });
+
     }
 
-    // Highlight the button that was clicked
+    // Highlight selected answer
     button.classList.add("selected");
 
     console.log("Answer saved:", question, response);
+
 }
 
 
-// Send the form answers
+// ========================================
+// FORM DATA
+// ========================================
+
+function updateFormData() {
+
+    // Save all answers into their hidden fields
+    Object.keys(answers).forEach((question) => {
+
+        const input = document.getElementById(question);
+
+        if (input) {
+            input.value = answers[question];
+        }
+
+    });
+
+    // Save written message
+    const messageInput = document.getElementById("message");
+
+    if (messageInput) {
+        answers.message = messageInput.value.trim();
+    }
+
+}
+
+
+// ========================================
+// SUBMIT TO FORMSPREE
+// ========================================
+
 async function sendAnswers() {
+
+    updateFormData();
+
     const formData = new FormData(form);
 
     try {
+
         const response = await fetch(form.action, {
+
             method: "POST",
+
             body: formData,
+
             headers: {
                 Accept: "application/json"
             }
+
         });
 
-        return response.ok;
+        if (response.ok) {
+
+            console.log("Responses successfully submitted!");
+
+            return true;
+
+        } else {
+
+            const result = await response.json().catch(() => null);
+
+            console.error("Formspree error:", result);
+
+            return false;
+
+        }
 
     } catch (error) {
-        console.error("Error sending answers:", error);
+
+        console.error("Submission error:", error);
+
         return false;
+
     }
+
 }
 
 
-// Submit the message
-async function submitMessage() {
+// ========================================
+// PAGE 7 MESSAGE
+// ========================================
+
+// Continue without submitting the form.
+// All answers will be submitted together on page 14.
+
+function submitMessage() {
+
     const messageInput = document.getElementById("message");
-    const message = messageInput.value.trim();
 
-    if (!message) {
-        alert("Please write a message before continuing 🖤");
+    if (!messageInput.value.trim()) {
+
+        alert("You can write something before continuing 🖤");
+
         return;
+
     }
 
-    answers.message = message;
+    answers.message = messageInput.value.trim();
 
-    const sent = await sendAnswers();
+    nextPage();
 
-    if (sent) {
-        nextPage();
-    } else {
-        alert(
-            "Something went wrong. Please check your internet connection and try again."
-        );
-    }
 }
 
 
-// Show the final love message
+// ========================================
+// FINAL LOVE MESSAGE
+// ========================================
+
 function showLove() {
+
     const loveMessage = document.getElementById("loveMessage");
 
     if (loveMessage) {
+
         loveMessage.style.display = "block";
+
     }
+
 }
 
 
-// Prevent normal form submission
+// ========================================
+// FINAL FORM SUBMISSION
+// ========================================
+
 if (form) {
-    form.addEventListener("submit", (event) => {
+
+    form.addEventListener("submit", async function(event) {
+
         event.preventDefault();
+
+        const submitBtn = document.getElementById("submitBtn");
+
+        // Prevent multiple submissions
+        if (submitBtn.disabled) return;
+
+        submitBtn.disabled = true;
+
+        submitBtn.textContent = "Sending... ❤️";
+
+        const sent = await sendAnswers();
+
+        if (sent) {
+
+            submitBtn.textContent = "Sent successfully ❤️";
+
+            // Display confirmation
+            const card = document.querySelector(".card");
+
+            card.innerHTML = `
+                <div class="page active">
+                    <div class="circle">❤️</div>
+
+                    <p class="small-title">THANK YOU</p>
+
+                    <h1>Message received!</h1>
+
+                    <p class="main-text">
+                        Thank you for taking your time
+                        to go through this little space.
+                    </p>
+
+                    <p>
+                        Your responses mean a lot to me. 🖤
+                    </p>
+                </div>
+            `;
+
+        } else {
+
+            submitBtn.disabled = false;
+
+            submitBtn.textContent = "Send my responses ❤️";
+
+            alert(
+                "Something went wrong. Please check your internet connection and try again."
+            );
+
+        }
+
     });
+
 }
 
 
-
-// ===============================
+// ========================================
 // MUSIC CONTROLS
-// ===============================
+// ========================================
 
 const music = document.getElementById("bgMusic");
+
 const musicBtn = document.getElementById("musicBtn");
 
-// MUSIC PLAYLIST
+
+// Playlist
 const playlist = [
     "music.mp3",
     "song2.mp3"
@@ -210,99 +370,127 @@ const playlist = [
 
 let currentTrack = 0;
 
-// LOAD FIRST SONG
-music.src = playlist[currentTrack];
-music.load();
 
-
-// PLAY AND PAUSE MUSIC
-musicBtn.addEventListener("click", () => {
-
-    if (music.paused) {
-
-        music.play().catch(error => {
-            console.log("Music playback error:", error);
-        });
-
-    } else {
-
-        music.pause();
-
-    }
-
-});
-
-
-// AUTOMATICALLY PLAY NEXT SONG
-music.addEventListener("ended", () => {
-
-    currentTrack++;
-
-    // Return to the first song after the second
-    if (currentTrack >= playlist.length) {
-        currentTrack = 0;
-    }
+// Load first song
+if (music && playlist.length > 0) {
 
     music.src = playlist[currentTrack];
+
     music.load();
 
-    music.play().catch(error => {
-        console.log("Next song playback error:", error);
-    });
+}
 
-});
 
+// ========================================
 // UPDATE MUSIC BUTTON
-music.addEventListener("play", () => {
-    musicBtn.textContent = "⏸";
-});
+// ========================================
 
-music.addEventListener("pause", () => {
-    musicBtn.textContent = "▶";
-});
-
-
-// Update the music button appearance
 function updateMusicButton() {
+
     if (!music || !musicBtn) return;
 
     if (music.paused) {
+
         musicBtn.classList.remove("playing");
-        musicBtn.innerHTML = "🎵";
-        musicBtn.setAttribute("aria-label", "Play music");
+
+        musicBtn.textContent = "🎵";
+
+        musicBtn.setAttribute(
+            "aria-label",
+            "Play music"
+        );
+
     } else {
+
         musicBtn.classList.add("playing");
-        musicBtn.innerHTML = "🎶";
-        musicBtn.setAttribute("aria-label", "Pause music");
+
+        musicBtn.textContent = "🎶";
+
+        musicBtn.setAttribute(
+            "aria-label",
+            "Pause music"
+        );
+
     }
+
 }
 
 
-// Play or pause music when the button is clicked
+// ========================================
+// PLAY AND PAUSE MUSIC
+// ========================================
+
 if (music && musicBtn) {
-    musicBtn.addEventListener("click", async () => {
+
+    musicBtn.addEventListener("click", async function() {
+
         if (music.paused) {
+
             try {
+
                 await music.play();
+
             } catch (error) {
-                console.error("Music could not play:", error);
-                alert("The music could not be played. Please try again.");
+
+                console.error("Music playback error:", error);
+
+                alert(
+                    "Music could not be played. Please try again."
+                );
+
             }
+
         } else {
+
             music.pause();
+
         }
+
     });
 
 
-    // Keep the button state correct
+    // Update button when music starts
     music.addEventListener("play", updateMusicButton);
-    music.addEventListener("pause", updateMusicButton);
-    music.addEventListener("ended", updateMusicButton);
 
-    // Set the correct button state when the page loads
+
+    // Update button when music pauses
+    music.addEventListener("pause", updateMusicButton);
+
+
+    // Automatically play next song
+    music.addEventListener("ended", function() {
+
+        currentTrack++;
+
+        // Restart playlist after the last song
+        if (currentTrack >= playlist.length) {
+
+            currentTrack = 0;
+
+        }
+
+        music.src = playlist[currentTrack];
+
+        music.load();
+
+        music.play().catch(error => {
+
+            console.error("Next song playback error:", error);
+
+        });
+
+    });
+
+
+    // Initial button state
     updateMusicButton();
+
 }
 
 
-// Start the website on the first page
+// ========================================
+// START WEBSITE
+// ========================================
+
 showPage(currentPage);
+
